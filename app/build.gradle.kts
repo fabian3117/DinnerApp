@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
+  //  id("com.google.devtools.ksp") version "2.0.21-1.0.25"
+
 }
 
 android {
@@ -83,6 +86,10 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose")
     implementation("androidx.room:room-ktx:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+
+   // ksp("androidx.room:room-compiler:2.6.1")
+
 
 
 

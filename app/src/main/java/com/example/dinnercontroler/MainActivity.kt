@@ -25,6 +25,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.example.dinnercontroler.components.newUI.FinanceHealth
+import com.example.dinnercontroler.components.newUI.dataUI.UISecondSeccionHeader
+import com.example.dinnercontroler.dataBases.mainDatabase
 import com.example.dinnercontroler.ui.theme.DinnerControlerTheme
 import io.github.chouaibmo.rowkalendar.RowKalendar
 
@@ -44,13 +49,26 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class MainActivity : ComponentActivity() {
+
+    companion object{
+        lateinit var database: mainDatabase
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        /*database= Room.databaseBuilder(
+            applicationContext,
+            mainDatabase::class.java,
+            "my_database").build();
+*/
         enableEdgeToEdge()
         setContent {
             DinnerControlerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MainContent();
+                    Column {
+                        FinanceHealth();
+                        UISecondSeccionHeader();
+                    }
+                  //  MainContent();
                 }
             }
         }
