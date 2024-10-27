@@ -18,4 +18,21 @@
         <categories android:name="android.shortcut.conversation" />
         <capability-binding android:key="actions.intent.CREATE_MESSAGE" />
     </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_arrow_right"
+        android:shortcutDisabledMessage="@string/short_shortcut_new_registerDs"
+        android:shortcutId="test_shu"
+        android:shortcutShortLabel="@string/short_shortcut_new_register">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.dinnercontroler"
+            android:targetClass="com.example.dinnercontroler.MainActivity" >
+            <parameter
+                android:name="exercise.name"
+                android:key="exerciseType"/>
+        </intent>
+        <categories android:name="android.shortcut.conversation" />
+        <capability-binding android:key="actions.intent.CREATE_MESSAGE" />
+    </shortcut>
 </shortcuts>

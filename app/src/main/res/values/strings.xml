@@ -5,4 +5,6 @@
     <string name="finanzas">Finanzas</string>
     <string name="last_charge">Ultimos gastos</string>
     <string name="last_entry">Ultimos ingresos</string>
+    <string name="short_shortcut_new_register">Nuevo Gasto</string>
+    <string name="short_shortcut_new_registerDs">Nuevo registro deshabilitado</string>
 </resources>

@@ -19,18 +19,27 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Shop
 import androidx.compose.material.icons.outlined.MonetizationOn
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,6 +55,7 @@ import com.example.dinnercontroler.ui.theme.ColorSurface
 import com.example.dinnercontroler.ui.theme.ColorTextAction
 import com.example.dinnercontroler.ui.theme.ColorTextPrimary
 import com.example.dinnercontroler.ui.theme.ColorTextPrimaryVariant
+import kotlinx.coroutines.launch
 
 //@Preview(showBackground = true)
 @Composable
@@ -218,21 +228,30 @@ fun GastoElemento(data: DataRegisters = DataRegisterTest, modifier: Modifier = M
 }
 
 //@Preview
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ActionText(
     modifier: Modifier = Modifier
 ) {
+    val sheetState = rememberModalBottomSheetState()
+    val scope = rememberCoroutineScope()
+    var showBottomSheet by remember { mutableStateOf(false) }
+
+    scope.launch {  }
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(2.dp)
     ) {
-        Text(
-            text = "Ver todo",
-            style = MaterialTheme.typography.titleSmall,
-            color = ColorTextAction,
-            fontWeight = FontWeight.Medium
-        )
+        Button(onClick = { /*TODO*/ }) {
+            Text(
+                text = "Ver todo",
+                style = MaterialTheme.typography.titleSmall,
+                color = ColorTextAction,
+                fontWeight = FontWeight.Medium
+            )
+
+        }
         Icon(
             painter = painterResource(id = R.drawable.ic_arrow_right),
             contentDescription = null,
