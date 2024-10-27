@@ -87,10 +87,10 @@ dependencies {
     implementation(libs.rowkalendar)
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose")
-    implementation("androidx.room:room-ktx:2.6.1")
-    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    implementation(libs.androidx.room.ktx)
+    annotationProcessor(libs.room.compiler)
 
-    ksp("androidx.room:room-compiler:2.6.1")
+    ksp(libs.room.compiler)
 
 
 
