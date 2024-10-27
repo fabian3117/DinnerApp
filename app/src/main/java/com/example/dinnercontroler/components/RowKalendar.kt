@@ -7,11 +7,8 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.datetime.LocalDate
-
-import androidx.compose.foundation.lazy.LazyRow
 
 @Composable
 fun RowKalendar(
@@ -37,10 +34,9 @@ fun RowKalendar(
     ) {
         itemsIndexed(uiState.dates) { index, date ->
 
-            if (index == 0 && !uiState.isLoading){
+            if (index == 0 && !uiState.isLoading) {
                 viewModel.loadPreviousDates()
-            }
-            else if (index == uiState.dates.size - 1 && !uiState.isLoading) {
+            } else if (index == uiState.dates.size - 1 && !uiState.isLoading) {
                 viewModel.loadUpcomingDates()
             }
 

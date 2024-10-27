@@ -1,4 +1,5 @@
 package com.example.dinnercontroler.components
+
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import com.example.dinnercontroler.now
 
 import kotlinx.datetime.LocalDate
+
 @Composable
 fun DateCell(
     modifier: Modifier = Modifier,
@@ -48,7 +50,11 @@ fun DateCell(
     val cellBorder = border?.let {
         when {
             isSelected -> BorderStroke(it.selectedBorderWidth, it.selectedBorderColor)
-            date.isBefore(LocalDate.now("America/Argentina/Buenos_Aires")) -> BorderStroke(it.pastBorderWidth, it.pastBorderColor)
+            date.isBefore(LocalDate.now("America/Argentina/Buenos_Aires")) -> BorderStroke(
+                it.pastBorderWidth,
+                it.pastBorderColor
+            )
+
             else -> BorderStroke(it.futureBorderWidth, it.futureBorderColor)
         }
     }

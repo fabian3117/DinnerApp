@@ -1,9 +1,6 @@
 package com.example.dinnercontroler.components
 
-import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 
 /**
  * Checks whether the date is before [other] date.

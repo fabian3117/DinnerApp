@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AttachMoney
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -28,7 +30,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.dinnercontroler.R
@@ -36,6 +37,7 @@ import com.example.dinnercontroler.components.dates.financeList
 import com.example.dinnercontroler.components.newUI.dataUI.UIDataRegistersItem
 import com.example.dinnercontroler.components.newUI.dataUI.UIDataRegistersList
 import com.example.dinnercontroler.ui.theme.ColorAirQualityIconTitle
+import com.example.dinnercontroler.ui.theme.ColorHintIcons
 import com.example.dinnercontroler.ui.theme.ColorSurface
 import com.example.dinnercontroler.ui.theme.ColorTextPrimary
 import com.example.dinnercontroler.ui.theme.ColorTextPrimaryVariant
@@ -79,6 +81,7 @@ fun FinanceHealth(
         }
     }
 }
+
 //@Preview
 @Composable
 private fun AirQualityInfo(
@@ -112,6 +115,7 @@ private fun AirQualityInfo(
         }
     }
 }
+
 //@Preview
 @Composable
 private fun AirQualityHeader(
@@ -127,16 +131,22 @@ private fun AirQualityHeader(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Icon(
+                Icons.Default.AttachMoney,
+                contentDescription = "Icon main Money",
+                tint = ColorHintIcons,
+                modifier = Modifier.size(32.dp)
+            )
+            /*Icon(
                 painter = painterResource(R.drawable.ic_air_quality_header),
                 contentDescription = null,
                 modifier = Modifier.size(32.dp),
                 tint = ColorAirQualityIconTitle
-            )
+            )*/
             Text(
                 text = "Balance",
-                style = MaterialTheme.typography.titleMedium.copy(
-                    fontSize = 18.sp
-                )
+                color = ColorTextPrimary,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp
             )
         }
         RefreshButton()
@@ -172,6 +182,7 @@ private fun RefreshButton(
         }
     }
 }
+
 @Composable
 fun FinanceSection() {
     Column {

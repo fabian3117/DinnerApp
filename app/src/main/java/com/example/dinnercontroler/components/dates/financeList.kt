@@ -17,10 +17,11 @@ data class Finance(
     val name: String,
     val background: Color
 )
+
 val financeList = listOf(
     Finance(
         icon = Icons.Rounded.StarHalf,
-        name = "My\nBusiness",
+        name = "Mi\nHistorico",
         background = OrangeStart
     ),
 

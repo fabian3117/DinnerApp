@@ -1,7 +1,7 @@
 package com.example.dinnercontroler
 
+
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -16,15 +16,18 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -38,7 +41,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.room.Room
 import com.example.dinnercontroler.components.newUI.FinanceHealth
 import com.example.dinnercontroler.components.newUI.FinanceSection
 import com.example.dinnercontroler.components.newUI.dataUI.UISecondSeccionHeader
@@ -46,102 +48,142 @@ import com.example.dinnercontroler.dataBases.mainDatabase
 import com.example.dinnercontroler.models.Category
 import com.example.dinnercontroler.models.DataRegisters
 import com.example.dinnercontroler.ui.theme.DinnerControlerTheme
-
-
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import java.time.LocalDateTime
-
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class MainActivity : ComponentActivity() {
 
-    companion object{
+    companion object {
         lateinit var database: mainDatabase
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        /*
         database= Room.databaseBuilder(
             applicationContext,
             mainDatabase::class.java,
             "my_database").build();
-
-        val newRegister=DataRegisters(name = "Prueba-s", amount = 10.0, category = Category.Ingreso, subCategory = "TES", id = 0);
+*/
+        val newRegister = DataRegisters(
+            name = "Prueba-s",
+            amount = 10.0,
+            category = Category.Ingreso,
+            subCategory = "TES",
+            id = 0
+        );
         /*GlobalScope.launch {
             database.registerDAO().inserNewDataRegister(newRegister);
 
         }*/
+        /*
+        GlobalScope.launch {
+            val dat=database.registerDAO().getAllRegister();
+            dat.forEach{elemento->
+                Log.e("TAG",elemento.name);
+                Log.e("TAG",elemento.subCategory);
 
-GlobalScope.launch {
-    val dat=database.registerDAO().getAllRegister();
-    dat.forEach{elemento->
-        Log.e("TAG",elemento.name);
-        Log.e("TAG",elemento.subCategory);
-
-    }
-}
+            }
+        }*/
 
 
         enableEdgeToEdge()
         setContent {
             DinnerControlerTheme {
-               MainView();
+                MainView();
+            }
         }
+
+
+    }
+
+    @Composable
+    fun MainView() {
+        val navController = rememberNavController();
+        Scaffold(
+            floatingActionButton = { FloatingElement() },
+            topBar = { TopBar() },
+            bottomBar = { BottomNavigation(navController) },
+            content = { innerPadding ->
+                NavigationHost(navController, Modifier.padding(innerPadding));
+                //  MainContent();
+            }, modifier = Modifier.fillMaxSize()
+        )
     }
 
 
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview(showBackground = true)
 @Composable
-fun MainView(){
-    val navController = rememberNavController();
-    Scaffold(
-        floatingActionButton = {FloatingElement()},
-        bottomBar = {bottomNavigation(navController)},
-        content =  { innerPadding ->
-            Column {
-                FinanceHealth();
-                FinanceSection();
-                UISecondSeccionHeader();
-            }
-            //  MainContent();
-        }
-        ,modifier = Modifier.fillMaxSize())
+
+fun TopBar() {
+    SearchBar(modifier = Modifier
+        .fillMaxWidth()
+        .padding(10.dp),
+        inputField = { TopBarSearchCustomer() }, expanded = false, onExpandedChange = {}) {
+
+    }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun TopBarSearchCustomer() {
+    Row(modifier = Modifier.padding(10.dp)) {
+        Icon(
+            imageVector = Icons.Rounded.Search,
+            contentDescription = "Search",
+            tint = MaterialTheme.colorScheme.onSecondaryContainer
+        )
+        Spacer(modifier = Modifier.width(16.dp)) // Espacio entre el icono y el texto
+
+        Text(text = "Buscar", modifier = Modifier
+            .weight(1f)
+            .align(Alignment.CenterVertically));
+
+    }
 }
+
 @Composable
 fun currentRoute(navController: NavHostController): String? {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     return navBackStackEntry?.destination?.route
 }
+
 @Composable
 fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifier) {
-    NavHost(navController, startDestination = "rutinas", modifier = modifier) {
+    NavHost(navController, startDestination = "home", modifier = modifier) {
         composable("home") { HomeScreen(modifier) }
         composable("profile") { ProfileScreen() }
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-fun HomeScreen(modifier: Modifier) {
-    TODO("Not yet implemented")
+fun HomeScreen(modifier: Modifier = Modifier) {
+    Column {
+        FinanceHealth();
+        FinanceSection();
+        UISecondSeccionHeader();
+    }
+
 }
 
 @Composable
 fun ProfileScreen() {
-    TODO("Not yet implemented")
+    Text(text = "CHANGE")
 }
 
 
 @Composable
-fun bottomNavigation(navController: NavHostController) {
+fun BottomNavigation(navController: NavHostController) {
 
     BottomNavigation(
         backgroundColor = MaterialTheme.colorScheme.background,
@@ -156,17 +198,18 @@ fun bottomNavigation(navController: NavHostController) {
         )
 
         BottomNavigationItem(
-            icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
+            icon = { Icon(Icons.Default.Face, contentDescription = "Profile") },
             label = { Text(text = "Perfil") },
             selected = currentRoute == "profile",
             onClick = { navController.navigate("profile") }
         )
     }
 }
+
 @Preview(showBackground = true)
 @Composable
-fun FloatingElement(){
-    FloatingActionButton(onClick = {}){
+fun FloatingElement() {
+    FloatingActionButton(onClick = {}) {
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -181,10 +224,11 @@ fun FloatingElement(){
     }
 
 }
+
 @Preview
 @Composable
-fun MainContent(){
-    var isSelected:Boolean=false;
+fun MainContent() {
+    var isSelected: Boolean = false;
     val argentinaZoneId = ZoneId.of("America/Argentina/Buenos_Aires")
     val localDateTimeInArgentina = LocalDateTime.now(argentinaZoneId)
     val timeZone = TimeZone.of("ART")
@@ -199,7 +243,8 @@ fun MainContent(){
 
     CardAmountTotal()
 }
-fun LocalDate.Companion.now( Zone:String): LocalDate {
+
+fun LocalDate.Companion.now(Zone: String): LocalDate {
     val currentInstant = Clock.System.now()
     val timeZone = TimeZone.of("America/Argentina/Buenos_Aires")
     //val timeZone = TimeZone.currentSystemDefault()
@@ -207,15 +252,7 @@ fun LocalDate.Companion.now( Zone:String): LocalDate {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Composable
-fun TopElement(){
+fun TopElement() {
     Column {
         Row {
             Text(text = "Dia");
@@ -223,7 +260,7 @@ fun TopElement(){
             Text(text = "Mes");
             Text(text = "Año");
         }
-        Row{
+        Row {
             Text(text = "<")
             Text(text = "21 oct - 27 oct");
 
@@ -233,31 +270,34 @@ fun TopElement(){
 
 @Preview(showBackground = true)
 @Composable
-fun CardAmountTotal(){
-    var totalDinero=1000;
-    var gasto:Boolean=true;
+fun CardAmountTotal() {
+    var totalDinero = 1000;
+    var gasto: Boolean = true;
     Card(modifier = Modifier
         .fillMaxWidth(1f)
-        .padding(10.dp),onClick = { /*TODO*/ }) {
+        .padding(10.dp), onClick = { /*TODO*/ }) {
         Column(
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
             Text(text = "Tu balance");
 
-Row(
-    horizontalArrangement = Arrangement.SpaceBetween,
-    verticalAlignment = Alignment.CenterVertically
-) {
-    Text(text = "$$totalDinero");
-    AssistChip(onClick = { /*TODO*/ }, label = { Text(text = "Subio") })
-}}}
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(text = "$$totalDinero");
+                AssistChip(onClick = { /*TODO*/ }, label = { Text(text = "Subio") })
+            }
+        }
+    }
 }
+
 @Preview
 @Composable
-fun GastosCard(){
+fun GastosCard() {
     Card(modifier = Modifier
         .fillMaxWidth(1f)
-        .padding(10.dp),onClick = { /*TODO*/ }) {
+        .padding(10.dp), onClick = { /*TODO*/ }) {
         Column(modifier = Modifier.padding(10.dp)) {
             Text(text = "Gastos");
             Row(
@@ -266,23 +306,19 @@ fun GastosCard(){
             ) {
                 Text(text = "$");
                 AssistChip(onClick = { /*TODO*/ }, label = { Text(text = "Subio") })
-            }}}
+            }
+        }
+    }
 }
+
 @Preview
 @Composable
-fun VistaElemento(){
-    Row{
+fun VistaElemento() {
+    Row {
         Column {
             Text(text = "Gasto 1");
             Text(text = "Fecha");
         }
         Text(text = "Monto")
-    }
-}
-
-@Composable
-fun GreetingPreview() {
-    DinnerControlerTheme {
-        Greeting("Android")
     }
 }

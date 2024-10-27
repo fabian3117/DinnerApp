@@ -1,4 +1,5 @@
 package com.example.dinnercontroler.components
+
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -82,7 +83,8 @@ internal class RowKalendarViewModel : ViewModel() {
                 else uiState.value.dates.last().plus(DatePeriod(days = it))
             }
 
-            val updatedDates = if (isPast) newDates.reversed() + uiState.value.dates else uiState.value.dates + newDates
+            val updatedDates =
+                if (isPast) newDates.reversed() + uiState.value.dates else uiState.value.dates + newDates
             updateUiState(dates = updatedDates)
 
             if (isPast) daysLoadedPast += daysToLoad else daysLoadedFuture += daysToLoad

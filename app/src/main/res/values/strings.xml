@@ -3,4 +3,6 @@
     <string name="short_others">TEST</string>
     <string name="short_shortcut">TEST</string>
     <string name="finanzas">Finanzas</string>
+    <string name="last_charge">Ultimos gastos</string>
+    <string name="last_entry">Ultimos ingresos</string>
 </resources>

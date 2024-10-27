@@ -23,8 +23,8 @@ val ColorTextSecondaryVariant = ColorTextSecondary.copy(alpha = 0.7f)
 val ColorTextAction = ColorGradient2
 
 
-
-
+val ColorHintIcons = Color(0xFFa09bf0)
+val ColorDeleteElement = Color(0xFF8D0000)
 
 val PurpleStart = Color(0xFFD24BE9)
 val PurpleEnd = Color(0xFFDF8FEC)
