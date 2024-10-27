@@ -55,11 +55,11 @@ class MainActivity : ComponentActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /*database= Room.databaseBuilder(
+        database= Room.databaseBuilder(
             applicationContext,
             mainDatabase::class.java,
             "my_database").build();
-*/
+
         enableEdgeToEdge()
         setContent {
             DinnerControlerTheme {
