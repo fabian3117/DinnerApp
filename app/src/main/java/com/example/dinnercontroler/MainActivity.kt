@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.dinnercontroler.components.newUI.FinanceHealth
+import com.example.dinnercontroler.components.newUI.FinanceSection
 import com.example.dinnercontroler.components.newUI.dataUI.UISecondSeccionHeader
 import com.example.dinnercontroler.dataBases.mainDatabase
 import com.example.dinnercontroler.models.Category
@@ -65,10 +66,10 @@ class MainActivity : ComponentActivity() {
             "my_database").build();
 
         val newRegister=DataRegisters(name = "Prueba-s", amount = 10.0, category = Category.Ingreso, subCategory = "TES", id = 0);
-        GlobalScope.launch {
+        /*GlobalScope.launch {
             database.registerDAO().inserNewDataRegister(newRegister);
 
-        }
+        }*/
 
 GlobalScope.launch {
     val dat=database.registerDAO().getAllRegister();
@@ -84,6 +85,7 @@ GlobalScope.launch {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Column {
                         FinanceHealth();
+                        FinanceSection();
                         UISecondSeccionHeader();
                     }
                   //  MainContent();

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_frosty"
+        android:shortcutDisabledMessage="@string/short_others"
+        android:shortcutId="compose"
+        android:shortcutShortLabel="@string/short_shortcut">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.dinnercontroler"
+            android:targetClass="com.example.dinnercontroler.MainActivity" >
+            <parameter
+                android:name="exercise.name"
+                android:key="exerciseType"/>
+        </intent>
+        <categories android:name="android.shortcut.conversation" />
+        <capability-binding android:key="actions.intent.CREATE_MESSAGE" />
+    </shortcut>
+</shortcuts>

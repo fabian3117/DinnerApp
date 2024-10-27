@@ -1,8 +1,13 @@
 package com.example.dinnercontroler.components.newUI.dataUI
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowColumn
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -24,6 +29,7 @@ import com.example.dinnercontroler.R
 import com.example.dinnercontroler.ui.theme.ColorSurface
 import com.example.dinnercontroler.ui.theme.ColorTextAction
 import com.example.dinnercontroler.ui.theme.ColorTextPrimary
+import com.example.dinnercontroler.ui.theme.ColorTextPrimaryVariant
 
 @Preview(showBackground = true)
 @Composable
@@ -37,6 +43,7 @@ fun UISecondSeccionHeader(
             .padding(top = 5.dp),
         shape = RoundedCornerShape(5.dp),
         color = ColorSurface) {
+
         Row(
             modifier = modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
@@ -50,6 +57,52 @@ fun UISecondSeccionHeader(
                 fontSize = 20.sp
             )
             ActionText()
+        }
+    }
+
+}
+@OptIn(ExperimentalLayoutApi::class)
+@Preview
+@Composable
+fun gastos(){
+    var dal= listOf("A","B","C")
+
+
+    FlowColumn(
+        modifier = Modifier.size(200.dp,200.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        dal.onEach { item->
+            GastoElemento(
+                data = item,
+                modifier = Modifier.weight(weight = 1f)
+            )
+        }
+
+    }
+}
+@Preview
+@Composable
+fun GastoElemento(data: String="F", modifier: Modifier=Modifier) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(5.dp),
+    ) {
+        Column(
+            horizontalAlignment = Alignment.Start
+        ) {
+            Text(
+                text = "Fecha",
+                style = MaterialTheme.typography.labelSmall,
+                color = ColorTextPrimaryVariant
+            )
+            Text(
+                text = data,
+                style = MaterialTheme.typography.labelSmall,
+                color = ColorTextPrimary
+            )
         }
     }
 

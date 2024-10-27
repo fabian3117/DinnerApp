@@ -89,7 +89,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose")
     implementation(libs.androidx.room.ktx)
     annotationProcessor(libs.room.compiler)
-
+    implementation("androidx.compose.material:material-icons-extended:1.5.4")
     ksp(libs.room.compiler)
 
 
