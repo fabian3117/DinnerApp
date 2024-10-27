@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -43,9 +45,11 @@ fun UISecondSeccionHeader(
             .padding(top = 5.dp),
         shape = RoundedCornerShape(5.dp),
         color = ColorSurface) {
+Column {
+
 
         Row(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier.fillMaxWidth().padding(10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -58,39 +62,38 @@ fun UISecondSeccionHeader(
             )
             ActionText()
         }
-    }
+    LastGastosElement();
+}}
 
 }
 @OptIn(ExperimentalLayoutApi::class)
 @Preview
 @Composable
-fun gastos(){
-    var dal= listOf("A","B","C")
-
-
+fun LastGastosElement(){
+    var dal= listOf("A","B","C","D")
     FlowColumn(
-        modifier = Modifier.size(200.dp,200.dp),
+        modifier = Modifier
+            .padding(10.dp).fillMaxWidth().fillMaxHeight(0.5f),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         dal.onEach { item->
             GastoElemento(
                 data = item,
-                modifier = Modifier.weight(weight = 1f)
+                modifier = Modifier.fillMaxWidth()
             )
-        }
-
-    }
+        } }
 }
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun GastoElemento(data: String="F", modifier: Modifier=Modifier) {
-    Row(
+fun GastoElemento(data: String = "F", modifier: Modifier = Modifier) {
+    Card(
         modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(5.dp),
+
+        shape = RoundedCornerShape(8.dp)
     ) {
         Column(
+            modifier = Modifier.padding(16.dp),
             horizontalAlignment = Alignment.Start
         ) {
             Text(
@@ -105,7 +108,6 @@ fun GastoElemento(data: String="F", modifier: Modifier=Modifier) {
             )
         }
     }
-
 }
 
 @Preview

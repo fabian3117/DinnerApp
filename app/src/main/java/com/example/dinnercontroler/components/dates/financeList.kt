@@ -26,7 +26,7 @@ val financeList = listOf(
 
     Finance(
         icon = Icons.Rounded.Wallet,
-        name = "My\nWallet",
+        name = "Mis\nBilleteras",
         background = BlueStart
     ),
 

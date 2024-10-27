@@ -79,7 +79,7 @@ fun FinanceHealth(
         }
     }
 }
-
+//@Preview
 @Composable
 private fun AirQualityInfo(
     modifier: Modifier = Modifier,
@@ -172,7 +172,6 @@ private fun RefreshButton(
         }
     }
 }
-@Preview(showBackground = true)
 @Composable
 fun FinanceSection() {
     Column {
