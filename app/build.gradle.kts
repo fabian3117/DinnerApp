@@ -88,10 +88,14 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose")
     implementation(libs.androidx.room.ktx)
+    implementation (libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation.runtime.ktx)
+
     annotationProcessor(libs.room.compiler)
     implementation("androidx.compose.material:material-icons-extended:1.5.4")
     ksp(libs.room.compiler)
-
+    implementation(libs.androidx.compose.material3.material3)
+    implementation(libs.androidx.material)
 
 
 

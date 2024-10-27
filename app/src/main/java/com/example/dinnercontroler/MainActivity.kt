@@ -8,25 +8,37 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Card
-import androidx.compose.material3.ChipColors
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.example.dinnercontroler.components.newUI.FinanceHealth
 import com.example.dinnercontroler.components.newUI.FinanceSection
 import com.example.dinnercontroler.components.newUI.dataUI.UISecondSeccionHeader
@@ -34,18 +46,13 @@ import com.example.dinnercontroler.dataBases.mainDatabase
 import com.example.dinnercontroler.models.Category
 import com.example.dinnercontroler.models.DataRegisters
 import com.example.dinnercontroler.ui.theme.DinnerControlerTheme
-import io.github.chouaibmo.rowkalendar.RowKalendar
 
 
-import io.github.chouaibmo.rowkalendar.components.DateCell
-import io.github.chouaibmo.rowkalendar.components.DateCellDefaults
-import io.github.chouaibmo.rowkalendar.extensions.now
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
-import kotlinx.datetime.format
 import kotlinx.datetime.toLocalDateTime
 import java.time.LocalDateTime
 
@@ -79,20 +86,100 @@ GlobalScope.launch {
 
     }
 }
+
+
         enableEdgeToEdge()
         setContent {
             DinnerControlerTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Column {
-                        FinanceHealth();
-                        FinanceSection();
-                        UISecondSeccionHeader();
-                    }
-                  //  MainContent();
-                }
-            }
+               MainView();
         }
     }
+
+
+}
+
+@Composable
+fun MainView(){
+    val navController = rememberNavController();
+    Scaffold(
+        floatingActionButton = {FloatingElement()},
+        bottomBar = {bottomNavigation(navController)},
+        content =  { innerPadding ->
+            Column {
+                FinanceHealth();
+                FinanceSection();
+                UISecondSeccionHeader();
+            }
+            //  MainContent();
+        }
+        ,modifier = Modifier.fillMaxSize())
+}
+
+}
+@Composable
+fun currentRoute(navController: NavHostController): String? {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    return navBackStackEntry?.destination?.route
+}
+@Composable
+fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifier) {
+    NavHost(navController, startDestination = "rutinas", modifier = modifier) {
+        composable("home") { HomeScreen(modifier) }
+        composable("profile") { ProfileScreen() }
+    }
+}
+
+@Composable
+fun HomeScreen(modifier: Modifier) {
+    TODO("Not yet implemented")
+}
+
+@Composable
+fun ProfileScreen() {
+    TODO("Not yet implemented")
+}
+
+
+@Composable
+fun bottomNavigation(navController: NavHostController) {
+
+    BottomNavigation(
+        backgroundColor = MaterialTheme.colorScheme.background,
+        contentColor = Color.White
+    ) {
+        val currentRoute = currentRoute(navController)
+        BottomNavigationItem(
+            icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
+            label = { Text(text = "Inicio") },
+            selected = currentRoute == "home",
+            onClick = { navController.navigate("home") }
+        )
+
+        BottomNavigationItem(
+            icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
+            label = { Text(text = "Perfil") },
+            selected = currentRoute == "profile",
+            onClick = { navController.navigate("profile") }
+        )
+    }
+}
+@Preview(showBackground = true)
+@Composable
+fun FloatingElement(){
+    FloatingActionButton(onClick = {}){
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(horizontal = 16.dp)
+        ) {
+            Icon(imageVector = Icons.Outlined.Add, contentDescription = "Add new register")
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(text = "Nuevo registro", color = Color.White)
+
+//            Icon(painter = Icons.Default., contentDescription = "ff")
+        }
+    }
+
 }
 @Preview
 @Composable
