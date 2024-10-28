@@ -22,4 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "DinnerControler"
 include(":app")
- 
+include(":myapplication")

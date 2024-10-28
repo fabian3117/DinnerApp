@@ -5,13 +5,10 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="UISecction">
+      <SelectionState runConfigName="myapplication">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="TopBarSearchCustomer">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="BottomSheetSeeDetails">
+      <SelectionState runConfigName="myapplication.MainTileService">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
