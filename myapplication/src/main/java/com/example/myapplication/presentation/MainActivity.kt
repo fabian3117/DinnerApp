@@ -38,6 +38,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
@@ -52,6 +53,11 @@ import androidx.wear.compose.material.TimeText
 import androidx.wear.protolayout.material.CircularProgressIndicator
 import com.example.myapplication.R
 import com.example.myapplication.presentation.theme.DinnerControlerTheme
+import com.example.myapplication.utils.CircularRanges
+import com.example.myapplication.utils.CircularRangesBills
+import com.example.myapplication.utils.CircularRangesIncome
+import com.example.myapplication.utils.CircularRangesRight
+import com.example.myapplication.utils.CircularRangesUI
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,7 +76,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun WearApp(greetingName: String) {
    // WearAppMain()
-    CircularIndicators();
+    CircularIndicators(circularRangeUI = CircularRangesBills);
+    CircularIndicators(circularRangeUI = CircularRangesIncome);
     /*
     DinnerControlerTheme {
         Box(
@@ -86,17 +93,17 @@ fun WearApp(greetingName: String) {
 
      */
 }
-@Preview
+//@Preview
 @Composable
-fun CircularIndicators(){
+fun CircularIndicators(circularRangeUI: CircularRangesUI= CircularRangesBills){
     Box(modifier = Modifier.fillMaxSize()){
         val progressValue = 1f
-        val angleInitialGasto=-45f;
-        val angleFinalGasto=80f;
+        val angleInitialGasto=135f;
+        val angleFinalGasto=240f;
         val angleAnimation = rememberInfiniteTransition()
         val angle by angleAnimation.animateFloat(
-            initialValue = angleInitialGasto,
-            targetValue = angleFinalGasto,
+            initialValue = circularRangeUI.circularRanges.initialAngle,
+            targetValue = circularRangeUI.circularRanges.finalAngle,
             animationSpec = infiniteRepeatable(
                 animation = tween(durationMillis = 2000),
                 repeatMode = RepeatMode.Restart
@@ -106,10 +113,12 @@ fun CircularIndicators(){
 modifier = Modifier
     .fillMaxSize()
     .align(Alignment.Center),
-            startAngle = angleInitialGasto,
+            startAngle = circularRangeUI.circularRanges.initialAngle,
             endAngle=angle,
             strokeWidth = 5.dp,
-            progress = progressValue
+            progress = progressValue,
+            trackColor = Color.Red,
+            indicatorColor = circularRangeUI.colorIndicater
         );
     }
 }
@@ -124,26 +133,6 @@ fun WearAppMain(){
             contentAlignment = Alignment.Center
         ) {
             TimeText();
-
-            val progressValue = 1f
-            val angleInitialGasto=70f;
-            val angleFinalGasto=-45f;
-            CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.TopStart),
-                startAngle = angleInitialGasto,
-                endAngle=angleFinalGasto,
-                strokeWidth = 5.dp,
-                progress = progressValue
-            );
-
-            val angleInitialGanancia=110f;
-            val angleFinalGanancia=230f;
-            CircularProgressIndicator(
-                startAngle = angleInitialGanancia,
-                endAngle=angleFinalGanancia,
-                strokeWidth = 5.dp,
-                progress = progressValue
-            )//            CircularProgressIndicator();
             Spacer(modifier = Modifier.size(10.dp))
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
@@ -152,7 +141,6 @@ fun WearAppMain(){
                 text ="Balance"
             );
                 Spacer(modifier = Modifier.size(16.dp))
-
                 Text(
                     textAlign = TextAlign.Center,
                     color = MaterialTheme.colors.primary,
