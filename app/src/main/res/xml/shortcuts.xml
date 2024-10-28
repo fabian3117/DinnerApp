@@ -9,11 +9,11 @@
         android:shortcutShortLabel="@string/short_shortcut">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.example.dinnercontroler"
-            android:targetClass="com.example.dinnercontroler.MainActivity" >
+            android:targetClass="com.example.dinnercontroler.MainActivity"
+            android:targetPackage="com.example.dinnercontroler">
             <parameter
                 android:name="exercise.name"
-                android:key="exerciseType"/>
+                android:key="exerciseType" />
         </intent>
         <categories android:name="android.shortcut.conversation" />
         <capability-binding android:key="actions.intent.CREATE_MESSAGE" />
@@ -26,11 +26,11 @@
         android:shortcutShortLabel="@string/short_shortcut_new_register">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.example.dinnercontroler"
-            android:targetClass="com.example.dinnercontroler.MainActivity" >
+            android:targetClass="com.example.dinnercontroler.MainActivity"
+            android:targetPackage="com.example.dinnercontroler">
             <parameter
                 android:name="exercise.name"
-                android:key="exerciseType"/>
+                android:key="exerciseType" />
         </intent>
         <categories android:name="android.shortcut.conversation" />
         <capability-binding android:key="actions.intent.CREATE_MESSAGE" />

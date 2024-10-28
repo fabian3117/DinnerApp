@@ -62,12 +62,10 @@ dependencies {
     implementation("androidx.wear.compose:compose-navigation:1.4.0")
     implementation("androidx.wear.compose:compose-ui-tooling:1.4.0")
 
-  //  implementation(libs.androidx.compose.material.v150alpha04)
+//    implementation(libs.androidx.compose.material.v150alpha04)
 //    implementation(libs.androidx.compose.foundation.v150alpha04)
 //    implementation(libs.androidx.compose.ui.tooling)
-   // implementation("androidx.wear.compose:compose-material3:1.0.0-alpha25")
-
-
+    // implementation("androidx.wear.compose:compose-material3:1.0.0-alpha25")
 
 
     implementation(libs.play.services.wearable)

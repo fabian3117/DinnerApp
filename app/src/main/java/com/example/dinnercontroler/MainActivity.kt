@@ -144,9 +144,11 @@ fun TopBarSearchCustomer() {
         )
         Spacer(modifier = Modifier.width(16.dp)) // Espacio entre el icono y el texto
 
-        Text(text = "Buscar", modifier = Modifier
-            .weight(1f)
-            .align(Alignment.CenterVertically));
+        Text(
+            text = "Buscar", modifier = Modifier
+                .weight(1f)
+                .align(Alignment.CenterVertically)
+        );
 
     }
 }

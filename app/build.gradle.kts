@@ -4,7 +4,7 @@ plugins {
     id("com.google.devtools.ksp")
     alias(libs.plugins.compose.compiler)
 
-  //  id("com.google.devtools.ksp") version "2.0.21-1.0.25"
+    //  id("com.google.devtools.ksp") version "2.0.21-1.0.25"
 
 }
 
@@ -53,11 +53,11 @@ android {
         }
     }
 }
-kotlin{
+kotlin {
     sourceSets {
-            dependencies {
-                implementation("io.github.chouaibmo:rowkalendar:0.0.3")
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
+        dependencies {
+            implementation("io.github.chouaibmo:rowkalendar:0.0.3")
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
         }
     }
 }
@@ -88,7 +88,7 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose")
     implementation(libs.androidx.room.ktx)
-    implementation (libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.navigation.runtime.ktx)
 
     annotationProcessor(libs.room.compiler)
@@ -96,8 +96,6 @@ dependencies {
     ksp(libs.room.compiler)
     implementation(libs.androidx.compose.material3.material3)
     implementation(libs.androidx.material)
-
-
 
 
 }

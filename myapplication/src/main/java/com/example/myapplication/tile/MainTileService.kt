@@ -7,12 +7,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.wear.compose.material.MaterialTheme
-import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TimeText
 import androidx.wear.protolayout.ColorBuilders.argb
 import androidx.wear.protolayout.LayoutElementBuilders
@@ -25,7 +23,6 @@ import androidx.wear.protolayout.material.layouts.PrimaryLayout
 import androidx.wear.tiles.RequestBuilders
 import androidx.wear.tiles.TileBuilders
 import com.google.android.horologist.annotations.ExperimentalHorologistApi
-import com.google.android.horologist.compose.tools.LayoutRootPreview
 import com.google.android.horologist.compose.tools.buildDeviceParameters
 import com.google.android.horologist.tiles.SuspendingTileService
 
@@ -66,18 +63,19 @@ private fun tileLayout(context: Context): LayoutElementBuilders.LayoutElement {
                 .build()
         ).build()
 }
+
 @Preview
 @Composable
-fun MainTitlePresentation(){
-Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
-    TimeText();
-    androidx.wear.compose.material.Text(
-        modifier = Modifier.fillMaxWidth(),
-        textAlign = TextAlign.Center,
-        color = MaterialTheme.colors.primary,
-        text ="Gastos de hoy"
-    )
-}
+fun MainTitlePresentation() {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        TimeText();
+        androidx.wear.compose.material.Text(
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colors.primary,
+            text = "Gastos de hoy"
+        )
+    }
 //    androidx.wear.compose.material.Text(text = "Gastos de hoy")
 
 }
